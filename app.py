@@ -15,6 +15,7 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"],
 )
 
 class ChatMessage(BaseModel):
@@ -39,3 +40,10 @@ def chat(req: ChatRequest):
         return ChatResponse(answer=out)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+# Endpoint para funcionamiento de los CORS
+@app.get("/cors")
+def test_cors():
+    return {"message": "CORS están funcionando correctamente"}
+
